@@ -1,0 +1,60 @@
+server:
+  port: 8081
+
+spring:
+  profiles: prod
+
+
+  jpa:
+    database: POSTGRESQL
+    show-sql: true
+    hibernate:
+      ddl-auto: create-drop
+
+
+logging:
+  path: /var/logs/
+  file: TacoCloud.log
+  level:
+    root: WARN
+    org:
+    springframework:
+    security: DEBUG
+
+taco:
+  orders:
+    pageSize: 10
+
+
+---
+
+server:
+  port: 8080
+
+spring:
+  profiles: dev
+
+  jpa:
+    database: POSTGRESQL
+    show-sql: true
+    hibernate:
+      ddl-auto: create-drop
+  datasource:
+    platform: postgres
+    url: jdbc:postgresql://172.23.0.2:5432/postgres
+    username: postgres
+    password: taco
+    driverClassName: org.postgresql.Driver
+
+logging:
+  path: /var/logs/
+  file: TacoCloud.log
+  level:
+    root: WARN
+    org:
+    springframework:
+    security: DEBUG
+
+taco:
+  orders:
+    pageSize: 10
