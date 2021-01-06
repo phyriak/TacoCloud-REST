@@ -55,16 +55,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable()
+        http.authorizeRequests().antMatchers("/design", "/orders","/orders/current").authenticated().and().httpBasic().and().csrf().disable();
+    }
+/*        http.csrf().disable()
                 .authorizeRequests()
 
+
                 .antMatchers("/design", "/orders","/orders/current").hasAnyRole("USER")
-                .antMatchers("/", "/**")
-                .permitAll()
-                .anyRequest().authenticated()
-                .and()
-                .formLogin()
-                .loginPage("/login")
+                //.antMatchers("/", "/**")
+               // .permitAll()
+                .anyRequest().authenticated();*/
+              /*  .and()
+                .formLogin();*/
+
+              /*  .loginPage("/login")
                 .usernameParameter("username")
                 .passwordParameter("password")
                 .permitAll()
@@ -74,10 +78,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .logout()
                 .logoutSuccessUrl("/logout")
                 //.deleteCookies("JSESSIONID")
-                .logoutSuccessHandler(logoutSuccessHandler()).and().rememberMe();
+                .logoutSuccessHandler(logoutSuccessHandler()).and().rememberMe();*/
 
 
-    }
 
     @Bean
     public AuthenticationFailureHandler authenticationFailureHandler() {

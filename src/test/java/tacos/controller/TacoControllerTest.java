@@ -15,7 +15,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 
 @RunWith(SpringRunner.class)
-@WebMvcTest(DesignTacoController.class)
+@WebMvcTest(TacoController.class)
 public class TacoControllerTest {
 
     @Autowired

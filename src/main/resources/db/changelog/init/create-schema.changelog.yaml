@@ -139,6 +139,9 @@ databaseChangeLog:
                   name: create_at
                   type: timestamp
               - column:
+                  name: completed
+                  type: boolean
+              - column:
                   name: user_id
                   type: int
                   constraints:

@@ -1,5 +1,6 @@
 package tacos.model;
 
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import tacos.validator.OrderHasValidCardNumber;
@@ -31,37 +32,37 @@ public class Order implements Serializable {
     private Date createAt;
 
     @Column(name = "name")
-    @NotBlank(message = "Podanie imienia i nazwiska jest obowiązkowe.")
+  //  @NotBlank(message = "Podanie imienia i nazwiska jest obowiązkowe.")
     private String name;
 
     @Column(name = "street")
-    @NotBlank(message = "Podanie ulicy jest obowiązkowe")
+  //  @NotBlank(message = "Podanie ulicy jest obowiązkowe")
     private String street;
 
     @Column(name = "city")
-    @NotBlank(message = "Podanie miasta jest obowiązkowe")
+   // @NotBlank(message = "Podanie miasta jest obowiązkowe")
     private String city;
 
     @Column(name = "state")
-    @NotBlank(message = "Podanie województwa jest obowiązkowe")
+   // @NotBlank(message = "Podanie województwa jest obowiązkowe")
     private String state;
 
     @Column(name = "zip")
-    @NotBlank(message = "Podanie kodu pocztowego jest obowiązkowe")
+   // @NotBlank(message = "Podanie kodu pocztowego jest obowiązkowe")
     private String zip;
 
     @Column(name = "cc_number")
-    @NotBlank(message = "Podanie numeru karty jest obowiązkowe")
-    @OrderHasValidCardNumber
+   // @NotBlank(message = "Podanie numeru karty jest obowiązkowe")
+    //@OrderHasValidCardNumber
     private String ccNumber;
 
     @Column(name = "cc_expiration")
-    @Pattern(regexp = "^(0[1-9]|1[0-2])([\\/])([1-9][0-9])$",
-            message = "Wartość musi być w formacie MM/RR.")
+   // @Pattern(regexp = "^(0[1-9]|1[0-2])([\\/])([1-9][0-9])$",
+           // message = "Wartość musi być w formacie MM/RR.")
     private String ccExpiration;
 
     @Column(name = "cc_cvv")
-    @Digits(integer = 3, fraction = 0, message = "Nieprawidłowy kod CVV.")
+  //  @Digits(integer = 3, fraction = 0, message = "Nieprawidłowy kod CVV.")
     private String ccCVV;
 
     @JoinColumn(name = "tacos_id", referencedColumnName = "id")
@@ -71,6 +72,26 @@ public class Order implements Serializable {
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
+
+    @Column(name = "completed")
+    private Boolean completed;
+
+    @Builder(toBuilder = true)
+    public Order(String name, String street, String city, String state, String zip, String ccNumber, String ccExpiration, String ccCVV, List<Taco> tacos, User user, Boolean completed) {
+        this.id = id;
+        this.createAt = createAt;
+        this.name = name;
+        this.street = street;
+        this.city = city;
+        this.state = state;
+        this.zip = zip;
+        this.ccNumber = ccNumber;
+        this.ccExpiration = ccExpiration;
+        this.ccCVV = ccCVV;
+        this.tacos = tacos;
+        this.user = user;
+        this.completed = completed;
+    }
 
 
     public void addDesign(Taco design) {

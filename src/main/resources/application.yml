@@ -2,15 +2,18 @@ server:
   port: 8081
 
 spring:
-  profiles: prod
-
-
+  profiles: dev
   jpa:
     database: POSTGRESQL
     show-sql: true
     hibernate:
-      ddl-auto: create-drop
-
+      ddl: create-drop
+  datasource:
+    platform: postgres
+    url: jdbc:postgresql://172.23.0.2:5432/postgres
+    username: postgres
+    password: taco
+    driverClassName: org.postgresql.Driver
 
 logging:
   path: /var/logs/
@@ -33,18 +36,19 @@ server:
 
 spring:
   profiles: dev
-
   jpa:
     database: POSTGRESQL
     show-sql: true
     hibernate:
-      ddl-auto: create-drop
+      ddl: update
   datasource:
     platform: postgres
     url: jdbc:postgresql://172.23.0.2:5432/postgres
     username: postgres
     password: taco
     driverClassName: org.postgresql.Driver
+
+
 
 logging:
   path: /var/logs/
